@@ -85,15 +85,17 @@ func poller(lrpc lightningrpc.RpcInterface, nview *seed.NetworkView) {
 		r, err := lrpc.ListNodes()
 
 		if err != nil {
-			log.Errorf("Error trying to get update from lightningd: %v", err)
+			log.Errorf("Error trying to get update from %v: %v", *clientType, err)
 		} else {
-			log.Debugf("Got %d nodes from lightningd", len(r.Nodes))
+			numAdded := 0
 			for _, n := range r.Nodes {
 				if len(n.Addresses) == 0 {
 					continue
 				}
 				nview.AddNode(n)
+				numAdded++
 			}
+			log.Debugf("Got %d of %d non-empty nodes from %v", numAdded, len(r.Nodes), *clientType)
 		}
 	}
 
