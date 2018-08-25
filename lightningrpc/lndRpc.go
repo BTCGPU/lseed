@@ -202,14 +202,17 @@ func (lnd *LndRpc) _getClientConn(skipMacaroons bool) *grpc.ClientConn {
 			log.Errorf("%v", err)
 		}
 
-		macConstraints := []macaroons.Constraint{
-			macaroons.TimeoutConstraint(lnd.macaroonTimeout),
+		var macConstraints []macaroons.Constraint
 
-			// Lock macaroon down to a specific IP address.
-			macaroons.IPLockConstraint(lnd.macaroonIp),
-
-			// ... Add more constraints if needed.
+		// Optionally add timeout.
+		if lnd.macaroonTimeout > 0 {
+			macConstraints = append(macConstraints,
+				macaroons.TimeoutConstraint(lnd.macaroonTimeout))
 		}
+
+		// Lock macaroon down to a specific IP address.
+		macConstraints = append(macConstraints, macaroons.IPLockConstraint(lnd.macaroonIp))
+		// ... Add more constraints if needed.
 
 		// Apply constraints to the macaroon.
 		constrainedMac, err := macaroons.AddConstraints(mac, macConstraints...)

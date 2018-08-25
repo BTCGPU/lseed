@@ -35,7 +35,7 @@ var (
 	lndTlsCertPath     = flag.String("tlscertpath", "~/.lnd/tls.cert", "Path to TLS certificate")
 	lndNoMacaroons     = flag.Bool("no-macaroons", false, "Skip Macaroon authetication for lnd")
 	lndMacaroonPath    = flag.String("macaroonpath", "~/.lnd/admin.macaroon", "Path to macaroon file")
-	lndMacaroonTimeout = flag.Int64("macaroontimeout", 60, "Anti-replay macaroon validity time in seconds")
+	lndMacaroonTimeout = flag.Int64("macaroontimeout", 0, "Anti-replay macaroon validity time in seconds")
 	lndMacaroonIp      = flag.String("macaroonip", "", "If set, lock macaroon to specific IP address")
 )
 
