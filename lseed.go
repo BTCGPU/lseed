@@ -19,7 +19,7 @@ var (
 
 	listenAddr   = flag.String("listen", "0.0.0.0:53", "Listen address for incoming requests.")
 	rootDomain   = flag.String("root-domain", "lseed.bitcoinstats.com", "Root DNS seed domain.")
-	pollInterval = flag.Int("poll-interval", 10, "Time between polls to lightningd for updates")
+	pollInterval = flag.Int("poll-interval", 10, "Time between polls to lightningd for updates in second.")
 	debug        = flag.Bool("debug", false, "Be very verbose")
 	numResults   = flag.Int("results", 25, "How many results shall we return to a query?")
 
