@@ -40,3 +40,7 @@ The answer contains the record matching the query, or the record of the other IP
 
 Currently the seed will poll a local Lightning node periodically and update its local view accordingly.
 In future I'd like to introduce a number of different information sources and add further tests, such as testing for reachability before returning nodes.
+
+## Deployment
+
+Please refer to [this issue](https://github.com/BTCGPU/lnd/issues/5)
